@@ -1,0 +1,329 @@
+========================================================================
+  HR Resume Database — Query Comparison Runner
+========================================================================
+
+------------------------------------------------------------------------
+  Q1 — Full resume for user 'user_0001' / Повне резюме користувача
+  Arguments: ('user_0001',)
+------------------------------------------------------------------------
+
+  [+] PostgreSQL  (54.8 ms)
+  ------------------------------------------------------------
+    {
+      "login": "user_0001",
+      "full_name": "Serhii Shevchenko",
+      "birth_date": "1992-05-03",
+      "summary": "Passionate developer with background in distributed systems and algorithms.",
+      "city": "Kharkiv",
+      "education": [
+        {
+          "university": "Taras Shevchenko National University of Kyiv (MechMat)",
+          "degree": "Bachelor of Information Systems",
+          "graduation_year": 2015
+        }
+      ],
+      "hobbies": [
+        "Reading",
+        "Travel"
+      ],
+      "experience": [
+        {
+          "company": "EPAM",
+          "position": "Product Manager",
+          "start_date": "2016-05-02",
+          "end_date": null
+        },
+        {
+          "company": "Playrix",
+          "position": "Team Lead",
+          "start_date": "2020-09-14",
+          "end_date": null
+        },
+        {
+          "company": "Eleks",
+          "position": "Project Manager",
+          "start_date": "2022-10-01",
+          "end_date": null
+        }
+      ]
+    }
+
+  [+] MongoDB  (57.1 ms)
+  ------------------------------------------------------------
+    {
+      "user": {
+        "login": "user_0001",
+        "password_hash": "e56121c50b851d897e1365c01f459cdac9b60dcf8690d6f9c942d6c4e6a07673"
+      },
+      "full_name": "Serhii Shevchenko",
+      "birth_date": "1992-05-03",
+      "summary": "Passionate developer with background in distributed systems and algorithms.",
+      "city": "Kharkiv",
+      "hobbies": [
+        "Travel",
+        "Reading"
+      ],
+      "experience": [
+        {
+          "company": "EPAM",
+          "position": "Product Manager",
+          "start_date": "2016-05-02",
+          "end_date": null
+        },
+        {
+          "company": "Eleks",
+          "position": "Project Manager",
+          "start_date": "2022-10-01",
+          "end_date": null
+        },
+        {
+          "company": "Playrix",
+          "position": "Team Lead",
+          "start_date": "2020-09-14",
+          "end_date": null
+        }
+      ],
+      "education": [
+        {
+          "university": "Taras Shevchenko National University of Kyiv (MechMat)",
+          "degree": "Bachelor of Information Systems",
+          "graduation_year": 2015
+        }
+      ]
+    }
+
+  [+] Neo4j  (28.6 ms)
+  ------------------------------------------------------------
+    {
+      "login": "user_0001",
+      "full_name": "Serhii Shevchenko",
+      "birth_date": "1992-05-03",
+      "summary": "Passionate developer with background in distributed systems and algorithms.",
+      "city": "Kharkiv",
+      "education": [
+        {
+          "university": "Taras Shevchenko National University of Kyiv (MechMat)",
+          "degree": "Bachelor of Information Systems",
+          "graduation_year": 2015
+        }
+      ],
+      "hobbies": [
+        "Reading",
+        "Travel"
+      ],
+      "experience": [
+        {
+          "company": "EPAM",
+          "position": "Product Manager",
+          "start_date": "2016-05-02",
+          "end_date": null
+        },
+        {
+          "company": "Playrix",
+          "position": "Team Lead",
+          "start_date": "2020-09-14",
+          "end_date": null
+        },
+        {
+          "company": "Eleks",
+          "position": "Project Manager",
+          "start_date": "2022-10-01",
+          "end_date": null
+        }
+      ]
+    }
+
+------------------------------------------------------------------------
+  Q2 — All unique hobbies across all resumes / Усі унікальні хобі
+------------------------------------------------------------------------
+
+  [+] PostgreSQL  (26.1 ms)
+  ------------------------------------------------------------
+    Board Games, Chess, Cinema, Cooking, Cycling, Dancing, Drawing, Fishing, Football, Gardening, Guitar, Photography, Programming, Reading, Rock Climbing, Running, Swimming, Travel, Volunteering, Yoga
+
+  [+] MongoDB  (62.0 ms)
+  ------------------------------------------------------------
+    Board Games, Chess, Cinema, Cooking, Cycling, Dancing, Drawing, Fishing, Football, Gardening, Guitar, Photography, Programming, Reading, Rock Climbing, Running, Swimming, Travel, Volunteering, Yoga
+
+  [+] Neo4j  (38.5 ms)
+  ------------------------------------------------------------
+    Board Games, Chess, Cinema, Cooking, Cycling, Dancing, Drawing, Fishing, Football, Gardening, Guitar, Photography, Programming, Reading, Rock Climbing, Running, Swimming, Travel, Volunteering, Yoga
+
+------------------------------------------------------------------------
+  Q3 — All unique cities across all resumes / Усі унікальні міста
+------------------------------------------------------------------------
+
+  [+] PostgreSQL  (38.9 ms)
+  ------------------------------------------------------------
+    Chernivtsi, Dnipro, Ivano-Frankivsk, Kharkiv, Kropyvnytskyi, Kyiv, Lutsk, Lviv, Odesa, Poltava, Rivne, Ternopil, Uzhhorod, Vinnytsia, Zaporizhzhia
+
+  [+] MongoDB  (29.5 ms)
+  ------------------------------------------------------------
+    Chernivtsi, Dnipro, Ivano-Frankivsk, Kharkiv, Kropyvnytskyi, Kyiv, Lutsk, Lviv, Odesa, Poltava, Rivne, Ternopil, Uzhhorod, Vinnytsia, Zaporizhzhia
+
+  [+] Neo4j  (12.7 ms)
+  ------------------------------------------------------------
+    Chernivtsi, Dnipro, Ivano-Frankivsk, Kharkiv, Kropyvnytskyi, Kyiv, Lutsk, Lviv, Odesa, Poltava, Rivne, Ternopil, Uzhhorod, Vinnytsia, Zaporizhzhia
+
+------------------------------------------------------------------------
+  Q4 — Hobbies of candidates in 'Kyiv' / Хобі здобувачів з міста
+  Arguments: ('Kyiv',)
+------------------------------------------------------------------------
+
+  [+] PostgreSQL  (28.2 ms)
+  ------------------------------------------------------------
+    Board Games, Chess, Cinema, Cooking, Cycling, Dancing, Drawing, Fishing, Football, Gardening, Guitar, Photography, Programming, Reading, Rock Climbing, Running, Swimming, Travel, Volunteering, Yoga
+
+  [+] MongoDB  (44.0 ms)
+  ------------------------------------------------------------
+    Board Games, Chess, Cinema, Cooking, Cycling, Dancing, Drawing, Fishing, Football, Gardening, Guitar, Photography, Programming, Reading, Rock Climbing, Running, Swimming, Travel, Volunteering, Yoga
+
+  [+] Neo4j  (14.4 ms)
+  ------------------------------------------------------------
+    Board Games, Chess, Cinema, Cooking, Cycling, Dancing, Drawing, Fishing, Football, Gardening, Guitar, Photography, Programming, Reading, Rock Climbing, Running, Swimming, Travel, Volunteering, Yoga
+
+------------------------------------------------------------------------
+  Q5 — Pairs of candidates who worked at the same company / Спільний заклад роботи
+------------------------------------------------------------------------
+
+  [+] PostgreSQL  (325.2 ms)
+  ------------------------------------------------------------
+    company       candidate_1        candidate_2            ...
+    ------------  -----------------  ---------------------  ------------------
+    Ajax Systems  Alina Kuzmenko     Alina Rudenko
+    Ajax Systems  Alina Kuzmenko     Andrii Kuzmenko
+    Ajax Systems  Alina Kuzmenko     Andrii Sydorenko
+    Ajax Systems  Alina Kuzmenko     Anna Kovalchuk
+    Ajax Systems  Alina Kuzmenko     Artem Petrenko
+    Ajax Systems  Alina Kuzmenko     Daryna Vasylenko
+    Ajax Systems  Alina Kuzmenko     Kateryna Moroz
+    Ajax Systems  Alina Kuzmenko     Liudmyla Marchenko
+    Ajax Systems  Alina Kuzmenko     Oksana Levchenko
+    Ajax Systems  Alina Kuzmenko     Oksana Melnyk
+    Ajax Systems  Alina Kuzmenko     Oleksandr Romanenko
+    Ajax Systems  Alina Kuzmenko     Viktoriia Hryshchenko
+    Ajax Systems  Alina Kuzmenko     Vladyslav Oliinyk
+    Ajax Systems  Alina Kuzmenko     Yaroslav Tkachenko
+    Ajax Systems  Alina Kuzmenko     Yuliia Polishchuk
+    Ajax Systems  Alina Kuzmenko     Yurii Honcharenko
+    Ajax Systems  Alina Rudenko      Andrii Kuzmenko
+    Ajax Systems  Alina Rudenko      Andrii Sydorenko
+    Ajax Systems  Alina Rudenko      Anna Kovalchuk
+    Ajax Systems  Alina Rudenko      Liudmyla Marchenko
+                                                            … and 29170 more …
+    Uklon         Yevhen Sydorenko   Oksana Melnyk
+    Uklon         Yevhen Sydorenko   Pavlo Hryshchenko
+    Uklon         Yevhen Sydorenko   Roman Kovalchuk
+    Uklon         Yevhen Sydorenko   Sofiia Kravchenko
+    Uklon         Yevhen Sydorenko   Sofiia Yakovenko
+    Uklon         Yevhen Sydorenko   Valentyna Rudenko
+    Uklon         Yevhen Sydorenko   Viktor Fedorenko
+    Uklon         Yevhen Sydorenko   Yurii Fedorenko
+    Uklon         Yevhen Sydorenko   Yurii Honcharenko
+    Uklon         Yurii Fedorenko    Andrii Tymchenko
+    Uklon         Yurii Fedorenko    Denys Klymenko
+    Uklon         Yurii Fedorenko    Liliia Danylenko
+    Uklon         Yurii Fedorenko    Liliia Hryshchenko
+    Uklon         Yurii Fedorenko    Maksym Petrenko
+    Uklon         Yurii Fedorenko    Nataliia Polishchuk
+    Uklon         Yurii Fedorenko    Oksana Melnyk
+    Uklon         Yurii Fedorenko    Sofiia Yakovenko
+    Uklon         Yurii Fedorenko    Valentyna Rudenko
+    Uklon         Yurii Fedorenko    Yurii Honcharenko
+    Uklon         Yurii Honcharenko  Liliia Danylenko
+
+  [+] MongoDB  (70.7 ms)
+  ------------------------------------------------------------
+    company       candidate_1        candidate_2            ...
+    ------------  -----------------  ---------------------  ------------------
+    Ajax Systems  Alina Kuzmenko     Alina Rudenko
+    Ajax Systems  Alina Kuzmenko     Andrii Kuzmenko
+    Ajax Systems  Alina Kuzmenko     Andrii Sydorenko
+    Ajax Systems  Alina Kuzmenko     Anna Kovalchuk
+    Ajax Systems  Alina Kuzmenko     Artem Petrenko
+    Ajax Systems  Alina Kuzmenko     Daryna Vasylenko
+    Ajax Systems  Alina Kuzmenko     Kateryna Moroz
+    Ajax Systems  Alina Kuzmenko     Liudmyla Marchenko
+    Ajax Systems  Alina Kuzmenko     Oksana Levchenko
+    Ajax Systems  Alina Kuzmenko     Oksana Melnyk
+    Ajax Systems  Alina Kuzmenko     Oleksandr Romanenko
+    Ajax Systems  Alina Kuzmenko     Viktoriia Hryshchenko
+    Ajax Systems  Alina Kuzmenko     Vladyslav Oliinyk
+    Ajax Systems  Alina Kuzmenko     Yaroslav Tkachenko
+    Ajax Systems  Alina Kuzmenko     Yuliia Polishchuk
+    Ajax Systems  Alina Kuzmenko     Yurii Honcharenko
+    Ajax Systems  Alina Rudenko      Andrii Kuzmenko
+    Ajax Systems  Alina Rudenko      Andrii Sydorenko
+    Ajax Systems  Alina Rudenko      Anna Kovalchuk
+    Ajax Systems  Alina Rudenko      Liudmyla Marchenko
+                                                            … and 29170 more …
+    Uklon         Yevhen Sydorenko   Oksana Melnyk
+    Uklon         Yevhen Sydorenko   Pavlo Hryshchenko
+    Uklon         Yevhen Sydorenko   Roman Kovalchuk
+    Uklon         Yevhen Sydorenko   Sofiia Kravchenko
+    Uklon         Yevhen Sydorenko   Sofiia Yakovenko
+    Uklon         Yevhen Sydorenko   Valentyna Rudenko
+    Uklon         Yevhen Sydorenko   Viktor Fedorenko
+    Uklon         Yevhen Sydorenko   Yurii Fedorenko
+    Uklon         Yevhen Sydorenko   Yurii Honcharenko
+    Uklon         Yurii Fedorenko    Andrii Tymchenko
+    Uklon         Yurii Fedorenko    Denys Klymenko
+    Uklon         Yurii Fedorenko    Liliia Danylenko
+    Uklon         Yurii Fedorenko    Liliia Hryshchenko
+    Uklon         Yurii Fedorenko    Maksym Petrenko
+    Uklon         Yurii Fedorenko    Nataliia Polishchuk
+    Uklon         Yurii Fedorenko    Oksana Melnyk
+    Uklon         Yurii Fedorenko    Sofiia Yakovenko
+    Uklon         Yurii Fedorenko    Valentyna Rudenko
+    Uklon         Yurii Fedorenko    Yurii Honcharenko
+    Uklon         Yurii Honcharenko  Liliia Danylenko
+
+  [+] Neo4j  (1442.5 ms)
+  ------------------------------------------------------------
+    company       candidate_1        candidate_2            ...
+    ------------  -----------------  ---------------------  ------------------
+    Ajax Systems  Alina Kuzmenko     Alina Rudenko
+    Ajax Systems  Alina Kuzmenko     Andrii Kuzmenko
+    Ajax Systems  Alina Kuzmenko     Andrii Sydorenko
+    Ajax Systems  Alina Kuzmenko     Anna Kovalchuk
+    Ajax Systems  Alina Kuzmenko     Artem Petrenko
+    Ajax Systems  Alina Kuzmenko     Daryna Vasylenko
+    Ajax Systems  Alina Kuzmenko     Kateryna Moroz
+    Ajax Systems  Alina Kuzmenko     Liudmyla Marchenko
+    Ajax Systems  Alina Kuzmenko     Oksana Levchenko
+    Ajax Systems  Alina Kuzmenko     Oksana Melnyk
+    Ajax Systems  Alina Kuzmenko     Oleksandr Romanenko
+    Ajax Systems  Alina Kuzmenko     Viktoriia Hryshchenko
+    Ajax Systems  Alina Kuzmenko     Vladyslav Oliinyk
+    Ajax Systems  Alina Kuzmenko     Yaroslav Tkachenko
+    Ajax Systems  Alina Kuzmenko     Yuliia Polishchuk
+    Ajax Systems  Alina Kuzmenko     Yurii Honcharenko
+    Ajax Systems  Alina Rudenko      Andrii Kuzmenko
+    Ajax Systems  Alina Rudenko      Andrii Sydorenko
+    Ajax Systems  Alina Rudenko      Anna Kovalchuk
+    Ajax Systems  Alina Rudenko      Liudmyla Marchenko
+                                                            … and 29170 more …
+    Uklon         Yevhen Sydorenko   Oksana Melnyk
+    Uklon         Yevhen Sydorenko   Pavlo Hryshchenko
+    Uklon         Yevhen Sydorenko   Roman Kovalchuk
+    Uklon         Yevhen Sydorenko   Sofiia Kravchenko
+    Uklon         Yevhen Sydorenko   Sofiia Yakovenko
+    Uklon         Yevhen Sydorenko   Valentyna Rudenko
+    Uklon         Yevhen Sydorenko   Viktor Fedorenko
+    Uklon         Yevhen Sydorenko   Yurii Fedorenko
+    Uklon         Yevhen Sydorenko   Yurii Honcharenko
+    Uklon         Yurii Fedorenko    Andrii Tymchenko
+    Uklon         Yurii Fedorenko    Denys Klymenko
+    Uklon         Yurii Fedorenko    Liliia Danylenko
+    Uklon         Yurii Fedorenko    Liliia Hryshchenko
+    Uklon         Yurii Fedorenko    Maksym Petrenko
+    Uklon         Yurii Fedorenko    Nataliia Polishchuk
+    Uklon         Yurii Fedorenko    Oksana Melnyk
+    Uklon         Yurii Fedorenko    Sofiia Yakovenko
+    Uklon         Yurii Fedorenko    Valentyna Rudenko
+    Uklon         Yurii Fedorenko    Yurii Honcharenko
+    Uklon         Yurii Honcharenko  Liliia Danylenko
+
+========================================================================
+  Done — all queries executed successfully.
+========================================================================

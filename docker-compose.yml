@@ -1,0 +1,87 @@
+services:
+  # ── Core Database Engines ──────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: hr_postgres
+    environment:
+      POSTGRES_USER: hr_user
+      POSTGRES_PASSWORD: hr_pass
+      POSTGRES_DB: hr_resumes
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hr_user -d hr_resumes"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  mongo:
+    image: mongo:7
+    container_name: hr_mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: hr_user
+      MONGO_INITDB_ROOT_PASSWORD: hr_pass
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  neo4j:
+    image: neo4j:5-community
+    container_name: hr_neo4j
+    environment:
+      NEO4J_AUTH: neo4j/hr_pass_neo4j
+      NEO4J_PLUGINS: '[]'
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4jdata:/data
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p hr_pass_neo4j 'RETURN 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+
+  # ── Web Visual UIs ────────────────────────────────────────────────
+  postgres_web:
+    image: adminer:latest
+    container_name: hr_postgres_web
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: hr_postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  mongo_web:
+    image: mongo-express:latest
+    container_name: hr_mongo_web
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: hr_mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      ME_CONFIG_MONGODB_AUTH_DATABASE: admin
+      ME_CONFIG_MONGODB_ADMINUSERNAME: hr_user
+      ME_CONFIG_MONGODB_ADMINPASSWORD: hr_pass
+      ME_CONFIG_BASICAUTH: "false"
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  mongodata:
+  neo4jdata:
